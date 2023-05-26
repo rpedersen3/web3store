@@ -14,7 +14,7 @@ abstract contract ERC721ProductExtension is Ownable, ERC6059, ERC721CollectionMe
 
     function ownerOf(
         uint256 tokenId
-    ) public view virtual override (ERC6059, ERC721)   returns (address) {
+    ) public view virtual override (ERC6059, IERC721, ERC721)   returns (address) {
         return super.ownerOf(tokenId);
     }
 
@@ -93,26 +93,26 @@ abstract contract ERC721ProductExtension is Ownable, ERC6059, ERC721CollectionMe
 
 
     function balanceOf(address owner) public view virtual 
-        override (ERC721, ERC6059) returns (uint256) 
+        override (IERC721, ERC721, ERC6059) returns (uint256) 
     {
         return super.balanceOf(owner);
     }
 
     function approve(address to, uint256 tokenId) public virtual 
-        override (ERC721, ERC6059) {
+        override (IERC721, ERC721, ERC6059) {
             super.approve(to, tokenId);
     }
 
     function isApprovedForAll(
         address owner,
         address operator
-    ) public view virtual override (ERC721, ERC6059)  returns (bool) {
+    ) public view virtual override (IERC721, ERC721, ERC6059)  returns (bool) {
         return super.isApprovedForAll(owner, operator);
     }
 
     function getApproved(
         uint256 tokenId
-    ) public view virtual override (ERC721, ERC6059) returns (address) {
+    ) public view virtual override (IERC721, ERC721, ERC6059) returns (address) {
         return super.getApproved(tokenId);
     }
 
@@ -122,7 +122,7 @@ abstract contract ERC721ProductExtension is Ownable, ERC6059, ERC721CollectionMe
         address to,
         uint256 tokenId,
         bytes memory data
-    ) public virtual override (ERC6059, ERC721)  {
+    ) public virtual override (ERC6059, IERC721, ERC721)  {
         super.safeTransferFrom(from, to, tokenId, data);
     }
 
@@ -130,7 +130,7 @@ abstract contract ERC721ProductExtension is Ownable, ERC6059, ERC721CollectionMe
         address from,
         address to,
         uint256 tokenId
-    ) public virtual  override (ERC6059, ERC721)  {
+    ) public virtual  override (ERC6059, IERC721, ERC721)  {
         super.safeTransferFrom(from, to, tokenId);
     }
 
@@ -138,16 +138,16 @@ abstract contract ERC721ProductExtension is Ownable, ERC6059, ERC721CollectionMe
         address from,
         address to,
         uint256 tokenId
-    ) public virtual override (ERC721, ERC6059)  {
+    ) public virtual override (IERC721, ERC721, ERC6059)  {
         super.transferFrom(from, to, tokenId);
     }
 
     function setApprovalForAll(address operator, bool approved) public virtual 
-        override (ERC721, ERC6059) {
+        override (IERC721, ERC721, ERC6059) {
             super.setApprovalForAll(operator, approved);
     }
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC6059) returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC6059, ERC721URIStorage) returns (bool) {
         return
                 interfaceId == 0x80ac58cd || 
                 interfaceId == type(ERC165).interfaceId ||
