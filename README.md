@@ -10,6 +10,14 @@ Draft ethereum contracts for Web3 Composable Commerce Experiment.
 * ERC721 Catalog Extension
 * ERC721 Product Extension
 
+### ERC721 Catalog Extension
+Overview:
+https://www.richcanvas3.com/erc-721-catalog-extension
+
+### ERC721 Product Extension
+Overview:
+https://www.richcanvas3.com/erc-721-product-extension
+
 
 ## Build Contracts
 install visual studio code
