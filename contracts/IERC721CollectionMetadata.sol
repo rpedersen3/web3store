@@ -4,6 +4,7 @@ pragma solidity >=0.8.0;
 
 interface IERC721CollectionMetadata {
 
+
     // Logged when the collection URL is changed
     /// @notice Emitted when the collectionURL is changed
     /// The empty string for `collectionUri` indicates that there is no collection metadata

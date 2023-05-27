@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: CC0-1.0
+
 pragma solidity >=0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -9,162 +11,82 @@ import "./IERC721ProductExtension.sol";
 import "./IERC6059.sol";
 import "./ERC6059.sol";
 
-abstract contract ERC721ProductExtension is Ownable, ERC6059, ERC721CollectionMetadata, ERC721URIStorage, IERC721ProductExtension {
+abstract contract ERC721ProductExtension is Ownable, ERC6059, IERC4906, IERC721CollectionMetadata, IERC721ProductExtension {
+    
     bytes4 private constant _INTERFACE_ID_ERC721ProductExtension = 0xbcc08bd2;
+    
+    mapping(uint256 => string) private _tokenURIs;
+
+    string[] private collectionUris;
 
     function ownerOf(
         uint256 tokenId
-    ) public view virtual override (ERC6059, IERC721, ERC721)   returns (address) {
+    ) public view virtual override (ERC6059, IERC721)   returns (address) {
         return super.ownerOf(tokenId);
     }
 
-    function _approve(address to, uint256 tokenId) internal override(ERC721, ERC6059) {
-        super._approve(to, tokenId);
+    function setCollectionUri(string calldata collectionUri) override external onlyOwner {
+        collectionUris.push(collectionUri);
+        emit UpdateCollection(collectionUri);
     }
 
-    function _exists(uint256 tokenId) internal view override(ERC721, ERC6059) returns (bool) {
-        return super._exists(tokenId);
-    }
-    function _isApprovedOrOwner(
-        address spender,
-        uint256 tokenId
-    ) internal view override (ERC721, ERC6059) returns (bool) {
-        return super._isApprovedOrOwner(spender, tokenId);
+    function getCollectionUri() override external view returns (string memory) {
+        uint last = collectionUris.length - 1;
+        return collectionUris[last];
     }
 
-    function _requireMinted(uint256 tokenId) internal view virtual 
-        override (ERC721, ERC6059)  {
-            super._requireMinted(tokenId);
+    function getCollectionHistory() override external view returns (string[] memory){
+        return collectionUris;
     }
 
-    function _mint(address to, uint256 tokenId) internal virtual
-        override (ERC721, ERC6059)  {
-            super._mint(to, tokenId);
-    }
+    /**
+     * @dev See {IERC721Metadata-tokenURI}.
+     */
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        _requireMinted(tokenId);
 
-    
-    function _safeTransfer(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes memory data
-    ) internal virtual 
-        override (ERC721, ERC6059) {
-        super._safeTransfer(from, to, tokenId, data);
-    }
+        string memory _tokenURI = _tokenURIs[tokenId];
+        string memory base = _baseURI();
 
-    function _safeMint(address to, uint256 tokenId) internal virtual 
-        override (ERC721, ERC6059)  {
-        super._safeMint(to, tokenId);
-    }
+        // If there is no base URI, return the token URI.
+        if (bytes(base).length == 0) {
+            return _tokenURI;
+        }
+        // If both are set, concatenate the baseURI and tokenURI (via abi.encodePacked).
+        if (bytes(_tokenURI).length > 0) {
+            return string(abi.encodePacked(base, _tokenURI));
+        }
 
-    function _safeMint(
-        address to,
-        uint256 tokenId,
-        bytes memory data
-    ) internal virtual 
-    override (ERC721, ERC6059)  {
-        super._safeMint(to, tokenId, data);
-    }
-
-
-    function _transfer(
-        address from,
-        address to,
-        uint256 tokenId
-    ) internal virtual override (ERC721, ERC6059) {
-        super._transfer(from, to, tokenId);
-    }
-
-/*
-    function transferChild(
-        uint256 tokenId,
-        address to,
-        uint256 destinationId,
-        uint256 childIndex,
-        address childAddress,
-        uint256 childId,
-        bool isPending,
-        bytes memory data
-    ) public virtual  override (IERC6059, ERC6059)  {
-        super.transferChild(tokenId, to, destinationId, childIndex, childAddress, childId, isPending, data);
-    }
-*/
-
-
-    function balanceOf(address owner) public view virtual 
-        override (IERC721, ERC721, ERC6059) returns (uint256) 
-    {
-        return super.balanceOf(owner);
-    }
-
-    function approve(address to, uint256 tokenId) public virtual 
-        override (IERC721, ERC721, ERC6059) {
-            super.approve(to, tokenId);
-    }
-
-    function isApprovedForAll(
-        address owner,
-        address operator
-    ) public view virtual override (IERC721, ERC721, ERC6059)  returns (bool) {
-        return super.isApprovedForAll(owner, operator);
-    }
-
-    function getApproved(
-        uint256 tokenId
-    ) public view virtual override (IERC721, ERC721, ERC6059) returns (address) {
-        return super.getApproved(tokenId);
-    }
-
-    
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes memory data
-    ) public virtual override (ERC6059, IERC721, ERC721)  {
-        super.safeTransferFrom(from, to, tokenId, data);
-    }
-
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public virtual  override (ERC6059, IERC721, ERC721)  {
-        super.safeTransferFrom(from, to, tokenId);
-    }
-
-    function transferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public virtual override (IERC721, ERC721, ERC6059)  {
-        super.transferFrom(from, to, tokenId);
-    }
-
-    function setApprovalForAll(address operator, bool approved) public virtual 
-        override (IERC721, ERC721, ERC6059) {
-            super.setApprovalForAll(operator, approved);
-    }
-
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC6059, ERC721URIStorage) returns (bool) {
-        return
-                interfaceId == 0x80ac58cd || 
-                interfaceId == type(ERC165).interfaceId ||
-                interfaceId == type(ERC721ProductExtension).interfaceId ||
-                interfaceId == type(IERC6059).interfaceId;
-    } 
-
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
         return super.tokenURI(tokenId);
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
-        super._burn(tokenId);
+    /**
+     * @dev Sets `_tokenURI` as the tokenURI of `tokenId`.
+     *
+     * Emits {MetadataUpdate}.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must exist.
+     */
+    function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
+        require(_exists(tokenId), "ERC721URIStorage: URI set of nonexistent token");
+        _tokenURIs[tokenId] = _tokenURI;
+
+        emit MetadataUpdate(tokenId);
     }
+
+    /**
+     * @dev See {ERC721-_burn}. This override additionally checks to see if a
+     * token-specific URI was set for the token, and if so, it deletes the token URI from
+     * the storage mapping.
+     */
+    function _burn(uint256 tokenId) internal virtual override {
+        super._burn(tokenId);
+
+        if (bytes(_tokenURIs[tokenId]).length != 0) {
+            delete _tokenURIs[tokenId];
+        }
+    }
+
 }

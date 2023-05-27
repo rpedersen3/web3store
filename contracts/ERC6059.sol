@@ -6,6 +6,7 @@ pragma solidity >=0.8.0;
 
 import "./IERC6059.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
@@ -52,7 +53,7 @@ error UnexpectedNumberOfChildren();
  * @dev This contract is hierarchy agnostic and can support an arbitrary number of nested levels up and down, as long as
  *  gas limits allow it.
  */
-contract ERC6059 is Context, IERC165, ERC721, IERC6059 {
+contract ERC6059 is Context, ERC721, IERC6059 {
     using Address for address;
 
     uint256 private constant _MAX_LEVELS_TO_CHECK_FOR_INHERITANCE_LOOP = 100;
@@ -145,7 +146,7 @@ contract ERC6059 is Context, IERC165, ERC721, IERC6059 {
      */
     function supportsInterface(
         bytes4 interfaceId
-    ) public view virtual override (ERC721, IERC165) returns (bool) {
+    ) public view virtual override (ERC721) returns (bool) {
         return
             interfaceId == type(IERC165).interfaceId ||
             interfaceId == type(IERC721).interfaceId ||

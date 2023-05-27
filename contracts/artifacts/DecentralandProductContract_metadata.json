@@ -1,0 +1,1650 @@
+{
+	"compiler": {
+		"version": "0.8.6+commit.11564f7e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name_",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "symbol_",
+						"type": "string"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "ChildAlreadyExists",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ChildIndexOutOfRange",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721AddressZeroIsNotaValidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721ApprovalToCurrentOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721ApproveCallerIsNotOwnerNorApprovedForAll",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721ApproveToCaller",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721InvalidTokenId",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721MintToTheZeroAddress",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721NotApprovedOrOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721TokenAlreadyMinted",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721TransferFromIncorrectOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721TransferToNonReceiverImplementer",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ERC721TransferToTheZeroAddress",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "IdZeroForbidden",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "IsNotContract",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "MaxPendingChildrenReached",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "childContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "childId",
+						"type": "uint256"
+					}
+				],
+				"name": "MaxRecursiveBurnsReached",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NestableTooDeep",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NestableTransferToDescendant",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NestableTransferToNonNestableImplementer",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NestableTransferToSelf",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NotApprovedOrDirectOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "PendingChildIndexOutOfRange",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "UnexpectedChildId",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "UnexpectedNumberOfChildren",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "AllChildrenRejected",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "approved",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_fromTokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_toTokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "BatchMetadataUpdate",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "childIndex",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "childAddress",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "childId",
+						"type": "uint256"
+					}
+				],
+				"name": "ChildAccepted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "childIndex",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "childAddress",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "childId",
+						"type": "uint256"
+					}
+				],
+				"name": "ChildProposed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "childIndex",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "childAddress",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "childId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "fromPending",
+						"type": "bool"
+					}
+				],
+				"name": "ChildTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "MetadataUpdate",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "fromTokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "toTokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "NestTransfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "collectionUri",
+						"type": "string"
+					}
+				],
+				"name": "UpdateCollection",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "parentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "childIndex",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "childAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "childId",
+						"type": "uint256"
+					}
+				],
+				"name": "acceptChild",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "parentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "childId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "addChild",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "approve",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "maxChildrenBurns",
+						"type": "uint256"
+					}
+				],
+				"name": "burn",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "checkOnERC721Received",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "childAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "childId",
+						"type": "uint256"
+					}
+				],
+				"name": "childIsInActive",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "parentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "childOf",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							}
+						],
+						"internalType": "struct IERC6059.Child",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "parentId",
+						"type": "uint256"
+					}
+				],
+				"name": "childrenOf",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							}
+						],
+						"internalType": "struct IERC6059.Child[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "directOwnerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getApproved",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCollectionHistory",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getCollectionUri",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "uri",
+						"type": "string"
+					}
+				],
+				"name": "mint",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "mintedWallets",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "destinationId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "nestTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "ownerOf",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "parentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "pendingChildOf",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							}
+						],
+						"internalType": "struct IERC6059.Child",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "parentId",
+						"type": "uint256"
+					}
+				],
+				"name": "pendingChildrenOf",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tokenId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "contractAddress",
+								"type": "address"
+							}
+						],
+						"internalType": "struct IERC6059.Child[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "maxRejections",
+						"type": "uint256"
+					}
+				],
+				"name": "rejectAllChildren",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "collectionUri",
+						"type": "string"
+					}
+				],
+				"name": "setCollectionUri",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "source",
+						"type": "string"
+					}
+				],
+				"name": "stringToBytes32",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "result",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenURI",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "transferFrom",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"acceptChild(uint256,uint256,address,uint256)": {
+					"details": "This moves the child token from parent token's pending child tokens array into the active child tokens  array.",
+					"params": {
+						"childAddress": "Address of the collection smart contract of the child token expected to be located at the  specified index of the given parent token's pending children array",
+						"childId": "ID of the child token expected to be located at the specified index of the given parent token's  pending children array",
+						"childIndex": "Index of a child tokem in the given parent's pending children array",
+						"parentId": "ID of the parent token for which the child token is being accepted"
+					}
+				},
+				"addChild(uint256,uint256,bytes)": {
+					"details": "This adds the iichild token into the given parent token's pending child tokens array.You MUST NOT call this method directly. To add a a child to an NFT you must use either  `nestTransfer`, `nestMint` or `transferChild` to the NFT.Requirements:  - `ownerOf` on the child contract must resolve to the called contract.  - The pending array of the parent contract must not be full.",
+					"params": {
+						"childId": "ID of the new proposed child token",
+						"data": "Additional data with no specified format",
+						"parentId": "ID of the parent token to receive the new child token"
+					}
+				},
+				"approve(address,uint256)": {
+					"details": "Gives permission to `to` to transfer `tokenId` token to another account. The approval is cleared when the token is transferred. Only a single account can be approved at a time, so approving the zero address clears previous approvals. Requirements: - The caller must own the token or be an approved operator. - `tokenId` must exist. Emits an {Approval} event."
+				},
+				"balanceOf(address)": {
+					"details": "Returns the number of tokens in ``owner``'s account."
+				},
+				"burn(uint256,uint256)": {
+					"details": "When a token is burned, its children are recursively burned as well.The approvals are cleared when the token is burned.Requirements:  - `tokenId` must exist.Emits a {Transfer} event.",
+					"params": {
+						"maxChildrenBurns": "Maximum children to recursively burn",
+						"tokenId": "ID of the token to burn"
+					},
+					"returns": {
+						"_0": "uint256 The number of recursive burns it took to burn all of the children"
+					}
+				},
+				"checkOnERC721Received(address,address,uint256,bytes)": {
+					"details": "The call is not executed if the target address is not a contract.",
+					"params": {
+						"data": "Optional data to send along with the call",
+						"from": "Address representing the previous owner of the given token",
+						"to": "Yarget address that will receive the tokens",
+						"tokenId": "ID of the token to be transferred"
+					},
+					"returns": {
+						"_0": "bool Boolean value signifying whether the call correctly returned the expected magic value"
+					}
+				},
+				"childIsInActive(address,uint256)": {
+					"params": {
+						"childAddress": "Address of the given token's collection smart contract",
+						"childId": "ID of the child token being checked"
+					},
+					"returns": {
+						"_0": "bool A boolean value signifying whether the given child token is included in an active child tokens array  of a token (`true`) or not (`false`)"
+					}
+				},
+				"childOf(uint256,uint256)": {
+					"details": "Returns a single Child struct locating at `index` of parent token's active child tokens array.The Child struct consists of the following values:  [      tokenId,      contractAddress  ]",
+					"params": {
+						"index": "Index of the child token in the parent token's active child tokens array",
+						"parentId": "ID of the parent token for which the child is being retrieved"
+					},
+					"returns": {
+						"_0": "struct A Child struct containing data about the specified child"
+					}
+				},
+				"childrenOf(uint256)": {
+					"details": "Returns array of Child structs existing for parent token.The Child struct consists of the following values:  [      tokenId,      contractAddress  ]",
+					"params": {
+						"parentId": "ID of the parent token for which to retrieve the active child tokens"
+					},
+					"returns": {
+						"_0": "struct[] An array of Child structs containing the parent token's active child tokens"
+					}
+				},
+				"directOwnerOf(uint256)": {
+					"details": "In the event the NFT is owned by an externally owned account, `tokenId` will be `0`.",
+					"params": {
+						"tokenId": "ID of the token for which the immediate owner is being retrieved"
+					},
+					"returns": {
+						"_0": "address Address of the immediate owner. If the token is owned by an externally owned account, its address  will be returned. If the token is owned by another token, the parent token's collection smart contract address  is returned",
+						"_1": "uint256 Token ID of the immediate owner. If the immediate owner is an externally owned account, the value  should be `0`",
+						"_2": "bool A boolean value signifying whether the immediate owner is a token (`true`) or not (`false`)"
+					}
+				},
+				"getApproved(uint256)": {
+					"details": "Returns the account approved for `tokenId` token. Requirements: - `tokenId` must exist."
+				},
+				"getCollectionHistory()": {
+					"returns": {
+						"_0": "The history of changes to `collectionUri`"
+					}
+				},
+				"getCollectionUri()": {
+					"returns": {
+						"_0": "The collection uri "
+					}
+				},
+				"isApprovedForAll(address,address)": {
+					"details": "Returns if the `operator` is allowed to manage all of the assets of `owner`. See {setApprovalForAll}"
+				},
+				"name()": {
+					"details": "See {IERC721Metadata-name}."
+				},
+				"nestTransferFrom(address,address,uint256,uint256,bytes)": {
+					"details": "The destination token MUST NOT be a child token of the token being transferred or one of its downstream  child tokens.",
+					"params": {
+						"destinationId": "ID of the token to receive the token being transferred",
+						"from": "Address of the direct owner of the token to be transferred",
+						"to": "Address of the receiving token's collection smart contract",
+						"tokenId": "ID of the token being transferred"
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"pendingChildOf(uint256,uint256)": {
+					"details": "Returns a single Child struct locating at `index` of parent token's active child tokens array.The Child struct consists of the following values:  [      tokenId,      contractAddress  ]",
+					"params": {
+						"index": "Index of the child token in the parent token's pending child tokens array",
+						"parentId": "ID of the parent token for which the pending child token is being retrieved"
+					},
+					"returns": {
+						"_0": "struct A Child struct containting data about the specified child"
+					}
+				},
+				"pendingChildrenOf(uint256)": {
+					"details": "Returns array of pending Child structs existing for given parent.The Child struct consists of the following values:  [      tokenId,      contractAddress  ]",
+					"params": {
+						"parentId": "ID of the parent token for which to retrieve the pending child tokens"
+					},
+					"returns": {
+						"_0": "struct[] An array of Child structs containing the parent token's pending child tokens"
+					}
+				},
+				"rejectAllChildren(uint256,uint256)": {
+					"details": "Removes the children from the pending array mapping.This does not update the ownership storage data on children. If necessary, ownership can be reclaimed by the  rootOwner of the previous parent.",
+					"params": {
+						"tokenId": "ID of the parent token for which to reject all of the pending tokens"
+					}
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"safeTransferFrom(address,address,uint256)": {
+					"details": "Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients are aware of the ERC721 protocol to prevent tokens from being forever locked. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must have been allowed to move this token by either {approve} or {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer. Emits a {Transfer} event."
+				},
+				"safeTransferFrom(address,address,uint256,bytes)": {
+					"details": "Safely transfers `tokenId` token from `from` to `to`. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must exist and be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer. Emits a {Transfer} event."
+				},
+				"setApprovalForAll(address,bool)": {
+					"details": "Approve or remove `operator` as an operator for the caller. Operators can call {transferFrom} or {safeTransferFrom} for any token owned by the caller. Requirements: - The `operator` cannot be the caller. Emits an {ApprovalForAll} event."
+				},
+				"setCollectionUri(string)": {
+					"params": {
+						"collectionUri": "The new collection metadata"
+					}
+				},
+				"supportsInterface(bytes4)": {
+					"details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
+				},
+				"symbol()": {
+					"details": "See {IERC721Metadata-symbol}."
+				},
+				"tokenURI(uint256)": {
+					"details": "See {IERC721Metadata-tokenURI}."
+				},
+				"transferFrom(address,address,uint256)": {
+					"details": "Transfers `tokenId` token from `from` to `to`. WARNING: Note that the caller is responsible to confirm that the recipient is capable of receiving ERC721 or else they may be permanently lost. Usage of {safeTransferFrom} prevents loss, though the caller must understand this adds an external call which potentially creates a reentrancy vulnerability. Requirements: - `from` cannot be the zero address. - `to` cannot be the zero address. - `tokenId` token must be owned by `from`. - If the caller is not `from`, it must be approved to move this token by either {approve} or {setApprovalForAll}. Emits a {Transfer} event."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"AllChildrenRejected(uint256)": {
+					"notice": "Used to notify listeners that all pending child tokens of a given token have been rejected."
+				},
+				"ChildAccepted(uint256,uint256,address,uint256)": {
+					"notice": "Used to notify listeners that a new child token was accepted by the parent token."
+				},
+				"ChildProposed(uint256,uint256,address,uint256)": {
+					"notice": "Used to notify listeners that a new token has been added to a given token's pending children array."
+				},
+				"ChildTransferred(uint256,uint256,address,uint256,bool)": {
+					"notice": "Used to notify listeners a child token has been transferred from parent token."
+				},
+				"NestTransfer(address,address,uint256,uint256,uint256)": {
+					"notice": "Used to notify listeners that the token is being transferred."
+				},
+				"UpdateCollection(string)": {
+					"notice": "Emitted when the collectionURL is changed The empty string for `collectionUri` indicates that there is no collection metadata"
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"acceptChild(uint256,uint256,address,uint256)": {
+					"notice": "@notice Used to accept a pending child token for a given parent token."
+				},
+				"addChild(uint256,uint256,bytes)": {
+					"notice": "Used to add a child token to a given parent token."
+				},
+				"burn(uint256,uint256)": {
+					"notice": "Used to burn a token."
+				},
+				"checkOnERC721Received(address,address,uint256,bytes)": {
+					"notice": "Used to invoke {IERC721Receiver-onERC721Received} on a target address."
+				},
+				"childIsInActive(address,uint256)": {
+					"notice": "Used to verify that the given child tokwn is included in an active array of a token."
+				},
+				"childOf(uint256,uint256)": {
+					"notice": "Used to retrieve a specific active child token for a given parent token."
+				},
+				"childrenOf(uint256)": {
+					"notice": "Used to retrieve the active child tokens of a given parent token."
+				},
+				"directOwnerOf(uint256)": {
+					"notice": "Used to retrieve the immediate owner of the given token."
+				},
+				"getCollectionHistory()": {
+					"notice": "Get the changes made to collectionUri"
+				},
+				"getCollectionUri()": {
+					"notice": "Get the collectionUri"
+				},
+				"nestTransferFrom(address,address,uint256,uint256,bytes)": {
+					"notice": "Used to transfer the token into another token."
+				},
+				"pendingChildOf(uint256,uint256)": {
+					"notice": "Used to retrieve a specific pending child token from a given parent token."
+				},
+				"pendingChildrenOf(uint256)": {
+					"notice": "Used to retrieve the pending child tokens of a given parent token."
+				},
+				"rejectAllChildren(uint256,uint256)": {
+					"notice": "Used to reject all pending children of a given parent token."
+				},
+				"setCollectionUri(string)": {
+					"notice": "set the new collectionUri - remember the date it was set on Throws if `tokenId` is not valid NFT"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"DecentralandProductContract.sol": "DecentralandProductContract"
+		},
+		"evmVersion": "berlin",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fc980984badf3984b6303b377711220e067722bbd6a135b24669ff5069ef9f32",
+				"dweb:/ipfs/QmPHXMSXj99XjSVM21YsY6aNtLLjLVXDbyN76J5HQYvvrz"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC165.sol": {
+			"keccak256": "0xd04b0f06e0666f29cf7cccc82894de541e19bb30a765b107b1e40bb7fe5f7d7a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7b652499d098e88d8d878374616bb58434301061cae2253298b3f374044e0ddb",
+				"dweb:/ipfs/QmbhAzctqo5jrSKU6idHdVyqfmzCcDbNUPvmx4GiXxfA6q"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC4906.sol": {
+			"keccak256": "0x2a9dadb806be80dd451821f1f1190eb9aa6f6edae85b185db29d60767cc0c5f4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5c25cac8dbe5bd96320053d23c3dacdb875e629d7c53ac00892eb7aa8500bde6",
+				"dweb:/ipfs/Qmaf2oqbxxdJA9DphAoH4UCb8aXEAVM8fnu6qMxHJ5ta4A"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC721.sol": {
+			"keccak256": "0xaf297d12d8d4a57fe01a70f0ef38908f208e3faedc577056d0b728fa2f3ccf0c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fbfaf37123958822a2720a4ea29651be00edab787540b770f73d3e025d286ff8",
+				"dweb:/ipfs/QmbzgWeTm8hJVUqWrNAwFjshqbYVyeGpQA8D1huzxQdmw6"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+			"keccak256": "0x2c309e7df9e05e6ce15bedfe74f3c61b467fc37e0fae9eab496acf5ea0bbd7ff",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7063b5c98711a98018ba4635ac74cee1c1cfa2ea01099498e062699ed9530005",
+				"dweb:/ipfs/QmeJ8rGXkcv7RrqLdAW8PCXPAykxVsddfYY6g5NaTwmRFE"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+			"keccak256": "0x5bce51e11f7d194b79ea59fe00c9e8de9fa2c5530124960f29a24d4c740a3266",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7e66dfde185df46104c11bc89d08fa0760737aa59a2b8546a656473d810a8ea4",
+				"dweb:/ipfs/QmXvyqtXPaPss2PD7eqPoSao5Szm2n6UMoiG8TZZDjmChR"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+			"keccak256": "0xa82b58eca1ee256be466e536706850163d2ec7821945abd6b4778cfb3bee37da",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6e75cf83beb757b8855791088546b8337e9d4684e169400c20d44a515353b708",
+				"dweb:/ipfs/QmYvPafLfoquiDMEj7CKHtvbgHu7TJNPSVPSCjrtjV8HjV"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
+			"keccak256": "0xa8796bd16014cefb8c26449413981a49c510f92a98d6828494f5fd046223ced3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://63a5e0bb5a7d182e0d0eef87033f78115eab791de3626a929bc98c157087880a",
+				"dweb:/ipfs/QmetkXAu2CJKS4qrZtEQPU8okAPwUwa6HL4XYwk8vrYMk8"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol": {
+			"keccak256": "0x7942989e3525aec1672469e4c65fb33fbd19c785c9cadbcb70fcbe1fe8bfdd37",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6c9f260258c2be0e3b75f8ca285872c4bfa3a8fc97fdc2e62366c78abf22b54f",
+				"dweb:/ipfs/QmTg1DMNwCDj8NVi6i1noqx7cxuRdPP4VyW4fzDkKAKmH2"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
+			"keccak256": "0xd1556954440b31c97a142c6ba07d5cade45f96fafd52091d33a14ebe365aecbf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://26fef835622b46a5ba08b3ef6b46a22e94b5f285d0f0fb66b703bd30217d2c34",
+				"dweb:/ipfs/QmZ548qdwfL1qF7aXz3xh1GCdTiST81kGGuKRqVUfYmPZR"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+			"keccak256": "0x75b829ff2f26c14355d1cba20e16fe7b29ca58eb5fef665ede48bc0f9c6c74b9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a0a107160525724f9e1bbbab031defc2f298296dd9e331f16a6f7130cec32146",
+				"dweb:/ipfs/QmemujxSd7gX8A9M8UwmNbz4Ms3U9FG9QfudUgxwvTmPWf"
+			]
+		},
+		"@openzeppelin/contracts/utils/Address.sol": {
+			"keccak256": "0x006dd67219697fe68d7fbfdea512e7c4cb64a43565ed86171d67e844982da6fa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2455248c8ddd9cc6a7af76a13973cddf222072427e7b0e2a7d1aff345145e931",
+				"dweb:/ipfs/QmfYjnjRbWqYpuxurqveE6HtzsY1Xx323J428AKQgtBJZm"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
+			]
+		},
+		"@openzeppelin/contracts/utils/Counters.sol": {
+			"keccak256": "0xf0018c2440fbe238dd3a8732fa8e17a0f9dce84d31451dc8a32f6d62b349c9f1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://59e1c62884d55b70f3ae5432b44bb3166ad71ae3acd19c57ab6ddc3c87c325ee",
+				"dweb:/ipfs/QmezuXg5GK5oeA4F91EZhozBFekhq5TD966bHPH18cCqhu"
+			]
+		},
+		"@openzeppelin/contracts/utils/Strings.sol": {
+			"keccak256": "0x3088eb2868e8d13d89d16670b5f8612c4ab9ff8956272837d8e90106c59c14a0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b81d9ff6559ea5c47fc573e17ece6d9ba5d6839e213e6ebc3b4c5c8fe4199d7f",
+				"dweb:/ipfs/QmPCW1bFisUzJkyjroY3yipwfism9RRCigCcK1hbXtVM8n"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0xd10975de010d89fd1c78dc5e8a9a7e7f496198085c151648f20cba166b32582b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fb0048dee081f6fffa5f74afc3fb328483c2a30504e94a0ddd2a5114d731ec4d",
+				"dweb:/ipfs/QmZptt1nmYoA5SgjwnSgWqgUSDgm4q52Yos3xhnMv3MV43"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x447a5f3ddc18419d41ff92b3773fb86471b1db25773e07f877f548918a185bf1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://be161e54f24e5c6fae81a12db1a8ae87bc5ae1b0ddc805d82a1440a68455088f",
+				"dweb:/ipfs/QmP7C3CHdY9urF4dEMb9wmsp1wMxHF6nhA2yQE5SKiPAdy"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/Math.sol": {
+			"keccak256": "0xe4455ac1eb7fc497bb7402579e7b4d64d928b846fce7d2b6fde06d366f21c2b3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cc8841b3cd48ad125e2f46323c8bad3aa0e88e399ec62acb9e57efa7e7c8058c",
+				"dweb:/ipfs/QmSqE4mXHA2BXW58deDbXE8MTcsL5JSKNDbm23sVQxRLPS"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/SignedMath.sol": {
+			"keccak256": "0xf92515413956f529d95977adc9b0567d583c6203fc31ab1c23824c35187e3ddc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c50fcc459e49a9858b6d8ad5f911295cb7c9ab57567845a250bf0153f84a95c7",
+				"dweb:/ipfs/QmcEW85JRzvDkQggxiBBLVAasXWdkhEysqypj9EaB6H2g6"
+			]
+		},
+		"DecentralandProductContract.sol": {
+			"keccak256": "0x39e9991d5ce69b59074ccee72f4b444db2bd885fca7e71b5d2c463e4bdde3a12",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://bbc8e98804616dc8f588f7f15773a0900643e1ca20a0065b88b27510bb4a9070",
+				"dweb:/ipfs/QmXYWqrKzfSp2eDEjAtmrr2KWveoUgLNuC1AJHdanfcXAj"
+			]
+		},
+		"ERC6059.sol": {
+			"keccak256": "0x275f84e1b22b28c83ae825bc0755253f266021fe52965d1d2a97a45da4181b2e",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://e9e10853c79f373462fdfd74df3d3060a3cad754b0daafa5598ffac24d405ba6",
+				"dweb:/ipfs/QmSE3q4W65LVxfNvdWgVgE9rvrwCfgCwuqWMc6KBHzwXtN"
+			]
+		},
+		"ERC721CollectionMetadata.sol": {
+			"keccak256": "0x4aacc5807ee141c9c7ccb9d04a5eaaf97f261f913b70bd3d2e0c3315692845bb",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://641aba9cf0987df3c811eca02df34d60636fabddd01edef426c93587e1fd573b",
+				"dweb:/ipfs/QmeXKiKFqYbqrwTBLDHBSgW4uczt6Lye9MstW85fkeFWtL"
+			]
+		},
+		"ERC721ProductExtension.sol": {
+			"keccak256": "0x0539edd0b4c8edf6dfc97a00a4e013c59f53654ea4758878c851be3eb5306da2",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://4d0b85d07df72b4c63a6bad9f42fa99d4daf92607c519313f52cf11a2c2eb78f",
+				"dweb:/ipfs/QmVpbYvA3X3ns3M1qPy39PEJ23reQuk6VKHuftDXHTjkD9"
+			]
+		},
+		"IERC6059.sol": {
+			"keccak256": "0x4105a0b706a825b9bfc7b3f4fb9a6c6a465a8ee627719d6262a57e2f785fae3a",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://d792320b548bc0cb3a726434569bc3a724a8f33bb7d5b6cad018d1a121deec3c",
+				"dweb:/ipfs/QmeUp34TB7udRvmzi9au4YgQVNJX5HNmaUnRxZfw6mRkfC"
+			]
+		},
+		"IERC721CollectionMetadata.sol": {
+			"keccak256": "0xa3188a8135b5f848cf7aee3c8a3a3d5108a4becb0b5b7c3b01a9ed5769fab337",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://2b53ee5cdfda27913f006de73831abf3ca52fec86c6615c0db19d6b9da335af9",
+				"dweb:/ipfs/QmY2gNLX9pirzSa5eSmsZ5DvHaE2g9KJZRPqMxAhBDq1Zx"
+			]
+		},
+		"IERC721ProductExtension.sol": {
+			"keccak256": "0xa26608ddfd25a59f9f5f3aab3c11cfc276d25d5845fecca4f01491de0c8c105b",
+			"license": "CC0-1.0",
+			"urls": [
+				"bzz-raw://01276d00cf12367a05d425553b1c114102ff1bff3ae6d079b1612f22e85c95f4",
+				"dweb:/ipfs/QmY7rFPWR5773759JJFciswLU9LVtUSP8A8RXY9ULcdThP"
+			]
+		}
+	},
+	"version": 1
+}

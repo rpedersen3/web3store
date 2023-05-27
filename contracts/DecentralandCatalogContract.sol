@@ -13,14 +13,15 @@ import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "./ERC721CatalogExtension.sol";
+import "./IERC721CollectionMetadata.sol";
 //import "hardhat/console.sol";
 
 
-// using ERC721URIStorage instead of ERC721 Metadata contract interface
-contract DecentralandCatalogContract is ERC721CatalogExtension {
+contract DecentralandCatalogContract is ERC721CatalogExtension  {
     
     using Strings for uint256;
     using Counters for Counters.Counter;
+
 
     Counters.Counter private _tokenIdCounter;
 
@@ -32,14 +33,16 @@ contract DecentralandCatalogContract is ERC721CatalogExtension {
 
     
 /*
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721CatalogExtension) returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721) returns (bool) {
         return
                 interfaceId == 0x80ac58cd || 
                 interfaceId == type(ERC721Enumerable).interfaceId || 
                 interfaceId == type(ERC165).interfaceId ||
+                interfaceId == type(ERC721CollectionMetadata).interfaceId ||
                 interfaceId == type(IERC6059).interfaceId;
     }
-*/  
+    */
+
     function mint(string memory uri) external payable  {
         //console.log("minting it");
         uint256 tokenId = _tokenIdCounter.current();
@@ -54,5 +57,9 @@ contract DecentralandCatalogContract is ERC721CatalogExtension {
         _setTokenURI(tokenId, uri);
         
     }
+
+
+
+
 
 }
