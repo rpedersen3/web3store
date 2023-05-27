@@ -1331,9 +1331,6 @@
 						"collectionUri": "The new collection metadata"
 					}
 				},
-				"supportsInterface(bytes4)": {
-					"details": "Returns true if this contract implements the interface defined by `interfaceId`. See the corresponding https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section] to learn more about how these ids are created. This function call must use less than 30 000 gas."
-				},
 				"symbol()": {
 					"details": "See {IERC721Metadata-symbol}."
 				},
@@ -1590,11 +1587,11 @@
 			]
 		},
 		"DecentralandProductContract.sol": {
-			"keccak256": "0x39e9991d5ce69b59074ccee72f4b444db2bd885fca7e71b5d2c463e4bdde3a12",
+			"keccak256": "0xad9936a668c70edba0485088a107cd5e2e943fa788a4fd3c0c9c11662d9993bb",
 			"license": "CC0-1.0",
 			"urls": [
-				"bzz-raw://bbc8e98804616dc8f588f7f15773a0900643e1ca20a0065b88b27510bb4a9070",
-				"dweb:/ipfs/QmXYWqrKzfSp2eDEjAtmrr2KWveoUgLNuC1AJHdanfcXAj"
+				"bzz-raw://a38d77359638639680d3e656a6c1451b4130ee951e0adf8af73ce7cae0dd919c",
+				"dweb:/ipfs/QmecS673fXNviqmZt5Es9t95H9QCpT7BFtwZ6AQoTjqgG5"
 			]
 		},
 		"ERC6059.sol": {
@@ -1614,11 +1611,11 @@
 			]
 		},
 		"ERC721ProductExtension.sol": {
-			"keccak256": "0x0539edd0b4c8edf6dfc97a00a4e013c59f53654ea4758878c851be3eb5306da2",
+			"keccak256": "0x80fc6304fb8bf838dccc76ee50d2a76d4cbe72f5e3757cb9a335ed7e565f352e",
 			"license": "CC0-1.0",
 			"urls": [
-				"bzz-raw://4d0b85d07df72b4c63a6bad9f42fa99d4daf92607c519313f52cf11a2c2eb78f",
-				"dweb:/ipfs/QmVpbYvA3X3ns3M1qPy39PEJ23reQuk6VKHuftDXHTjkD9"
+				"bzz-raw://bce136b9faa13adc6fae0d34936e69228a0bd781e56b579c626e75177dc71ac7",
+				"dweb:/ipfs/QmeiHcAMqaRazFaPF8DsYph2wJy39tFSp5wkRkUBYZ4yVo"
 			]
 		},
 		"IERC6059.sol": {

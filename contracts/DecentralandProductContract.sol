@@ -30,16 +30,7 @@ contract DecentralandProductContract is ERC721ProductExtension   {
         _tokenIdCounter.increment();
     }
 
-/*
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721ProductExtension) returns (bool) {
-        return
-                interfaceId == 0x80ac58cd || 
-                interfaceId == type(ERC721Enumerable).interfaceId || 
-                interfaceId == type(ERC165).interfaceId ||
-                interfaceId == type(ERC721ProductExtension).interfaceId ||
-                interfaceId == type(IERC6059).interfaceId;
-    }
-*/
+
 
     // payable => this function deals with money
     // require => put in check statements as pre-conditions

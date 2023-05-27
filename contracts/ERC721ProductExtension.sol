@@ -13,7 +13,7 @@ import "./ERC6059.sol";
 
 abstract contract ERC721ProductExtension is Ownable, ERC6059, IERC4906, IERC721CollectionMetadata, IERC721ProductExtension {
     
-    bytes4 private constant _INTERFACE_ID_ERC721ProductExtension = 0xbcc08bd2;
+    bytes4 private constant _INTERFACE_ID_ERC721ProductExtension = 0x80ac58ce;
     
     mapping(uint256 => string) private _tokenURIs;
 
@@ -23,6 +23,15 @@ abstract contract ERC721ProductExtension is Ownable, ERC6059, IERC4906, IERC721C
         uint256 tokenId
     ) public view virtual override (ERC6059, IERC721)   returns (address) {
         return super.ownerOf(tokenId);
+    }
+
+    
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC6059, IERC165) returns (bool) {
+        return
+                interfaceId == 0x80ac58ce || 
+                interfaceId == type(ERC165).interfaceId ||
+                interfaceId == type(ERC721CollectionMetadata).interfaceId ||
+                interfaceId == type(IERC6059).interfaceId;
     }
 
     function setCollectionUri(string calldata collectionUri) override external onlyOwner {

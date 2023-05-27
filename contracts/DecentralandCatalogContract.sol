@@ -12,6 +12,7 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "./ERC6059.sol";
 import "./ERC721CatalogExtension.sol";
 import "./IERC721CollectionMetadata.sol";
 //import "hardhat/console.sol";
@@ -30,18 +31,7 @@ contract DecentralandCatalogContract is ERC721CatalogExtension  {
     constructor(string memory name_, string memory symbol_) payable ERC6059 (name_, symbol_)   {
         _tokenIdCounter.increment();
     }
-
     
-/*
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721) returns (bool) {
-        return
-                interfaceId == 0x80ac58cd || 
-                interfaceId == type(ERC721Enumerable).interfaceId || 
-                interfaceId == type(ERC165).interfaceId ||
-                interfaceId == type(ERC721CollectionMetadata).interfaceId ||
-                interfaceId == type(IERC6059).interfaceId;
-    }
-    */
 
     function mint(string memory uri) external payable  {
         //console.log("minting it");
