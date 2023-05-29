@@ -18,6 +18,9 @@ https://www.richcanvas3.com/erc-721-catalog-extension
 Overview:
 https://www.richcanvas3.com/erc-721-product-extension
 
+### ERC721 Collection Metadata Extension
+Overview:
+https://www.richcanvas3.com/erc-721-collection-metadata-extension
 
 ## Build Contracts
 install visual studio code
